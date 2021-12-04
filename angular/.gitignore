@@ -41,4 +41,4 @@ Thumbs.db
 
 #ssh keys
 ssh_key_git
-/.pub
+*.pub
