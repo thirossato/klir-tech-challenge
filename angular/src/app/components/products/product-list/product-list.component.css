@@ -1,0 +1,12 @@
+.product-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  align-content: center;
+  justify-items: center;
+  gap: 50px;
+}
+
+.product-item{
+  display: flex;
+}

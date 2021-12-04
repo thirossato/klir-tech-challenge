@@ -1,0 +1,12 @@
+<mat-card class="product-card">
+  <mat-card-title>{{product.name}}</mat-card-title>
+  <img mat-card-lg-image [src]="productImage" [alt]="productImageAlt">
+  <mat-card-content>
+    <p>{{product.content}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-fab color="accent" aria-label="Add to cart button with cart icon">
+      <mat-icon>add_shopping_cart</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

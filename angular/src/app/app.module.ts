@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ProductsModule} from './components/products/products.module';
 
 @NgModule({
   declarations: [
@@ -19,17 +20,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CounterComponent,
     FetchDataComponent
   ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot([
-    { path: '', component: HomeComponent, pathMatch: 'full' },
-    { path: 'counter', component: CounterComponent },
-    { path: 'fetch-data', component: FetchDataComponent },
-], { relativeLinkResolution: 'legacy' }),
-    BrowserAnimationsModule
-  ],
+    imports: [
+        BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+        HttpClientModule,
+        FormsModule,
+        RouterModule.forRoot([
+            {path: '', component: HomeComponent, pathMatch: 'full'},
+            {path: 'counter', component: CounterComponent},
+            {path: 'fetch-data', component: FetchDataComponent},
+        ], {relativeLinkResolution: 'legacy'}),
+        BrowserAnimationsModule,
+        ProductsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

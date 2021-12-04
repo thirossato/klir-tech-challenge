@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {IProduct} from '../../../models/IProduct';
 
 @Component({
   selector: 'app-product',
@@ -6,8 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
+  @Input() product: IProduct;
 
-  constructor() { }
+  private get productImage() {
+    return this.product.imageName ? `/assets/images/${this.product.imageName}` : '/assets/images/unavailable.jpg';
+  }
+
+  private get productImageAlt() {
+    return `Image of product ${this.product.name}`;
+  }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
