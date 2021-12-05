@@ -1,12 +1,33 @@
-<mat-card class="product-card">
-  <mat-card-title>{{product.name}}</mat-card-title>
-  <img mat-card-lg-image [src]="productImage" [alt]="productImageAlt">
-  <mat-card-content>
-    <p>{{product.content}}</p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-fab color="accent" aria-label="Add to cart button with cart icon" (click)="addToCart()">
-      <mat-icon>add_shopping_cart</mat-icon>
-    </button>
-  </mat-card-actions>
-</mat-card>
+<ng-container *ngIf="showDetails else simpleView">
+  <div class="product-detais">
+    <div class="product-image">
+      <img [src]="productImage" [alt]="productImageAlt">
+    </div>
+    <div class="product-contents">
+      <h1>{{product.name}}</h1>
+      <p>{{product.content}}</p>
+    </div>
+    <div class="actions">
+      <label for="productQuantity">Quantity</label>
+      <input id="productQuantity" type="number" (change)="increaseProductCounter()">
+      <button mat-flat-button color="primary" (click)="addToCart()">Add to cart
+        <mat-icon>add_shopping_cart</mat-icon>
+      </button>
+    </div>
+
+  </div>
+</ng-container>
+<ng-template #simpleView>
+  <mat-card class="product-card">
+    <mat-card-title>{{product.name}}</mat-card-title>
+    <img mat-card-lg-image [src]="productImage" [alt]="productImageAlt">
+    <mat-card-content>
+      <p>{{product.content}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-fab color="primary" aria-label="Add to cart button with cart icon" (click)="goToDetails()">
+        <mat-icon>add_shopping_cart</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</ng-template>

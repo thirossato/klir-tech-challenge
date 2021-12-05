@@ -11,7 +11,8 @@ import { ProductListComponent } from './product-list/product-list.component';
 @NgModule({
   declarations: [ProductComponent, ProductListComponent],
   exports: [
-    ProductListComponent
+    ProductListComponent,
+    ProductComponent
   ],
   imports: [
     CommonModule,

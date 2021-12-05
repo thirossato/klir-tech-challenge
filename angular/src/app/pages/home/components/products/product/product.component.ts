@@ -1,16 +1,19 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IProduct} from '../../../../../shared/models/IProduct';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
   @Input() product: IProduct;
+  @Input() showDetails: boolean;
+  @Input() cartView: boolean;
 
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
@@ -22,6 +25,14 @@ export class ProductComponent implements OnInit {
 
   private get productImageAlt(): string {
     return `Image of product ${this.product.name}`;
+  }
+
+  public increaseProductCounter() {
+    this.product.count ? this.product.count++ : this.product.count = 1;
+  }
+
+  public goToDetails() {
+    this.router.navigateByUrl('product-details', {state: this.product});
   }
 
   public addToCart(): void {
