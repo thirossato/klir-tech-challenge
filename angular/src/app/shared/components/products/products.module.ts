@@ -1,15 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ProductComponent } from './product/product.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ProductComponent} from './product/product.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import { ProductListComponent } from './product-list/product-list.component';
-
+import {ProductListComponent} from './product-list/product-list.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {ProductDialogComponent} from './product-dialog/product-dialog.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
-  declarations: [ProductComponent, ProductListComponent],
+  declarations: [ProductComponent, ProductListComponent, ProductDialogComponent],
   exports: [
     ProductListComponent,
     ProductComponent
@@ -18,7 +20,10 @@ import { ProductListComponent } from './product-list/product-list.component';
     CommonModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    MatFormFieldModule
   ]
 })
-export class ProductsModule { }
+export class ProductsModule {
+}

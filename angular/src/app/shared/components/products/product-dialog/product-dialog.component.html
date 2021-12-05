@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Cart</h1>
+<div mat-dialog-content>
+  <p>{{product.name}} added to cart</p>
+  <app-product [product]="product" [cartView]="true"></app-product>
+  <p>Cart subtotal ({{numberOfItems}}): {{subtotal}}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button color="accent" mat-dialog-close>Continue shopping</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Go to cart</button>
+</div>

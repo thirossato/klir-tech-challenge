@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IProduct} from '../../../models/IProduct';
 import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {ProductDialogComponent} from '../product-dialog/product-dialog.component';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +15,10 @@ export class ProductComponent implements OnInit {
   @Input() cartView: boolean;
 
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    public dialog: MatDialog
+  ) {
   }
 
   ngOnInit() {
@@ -49,6 +54,17 @@ export class ProductComponent implements OnInit {
     } else {
       sessionStorage.setItem('cart', JSON.stringify([this.product]));
     }
+  }
+
+  public openCartDialog(event): void {
+    event.stopPropagation();
+    this.addToCart();
+    const dialogRef = this.dialog.open(ProductDialogComponent, {data: {...this.product}});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('navigate to cart');
+      }
+    });
   }
 
 }

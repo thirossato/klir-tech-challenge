@@ -5,6 +5,7 @@ export interface IProduct {
   name: string;
   price: number;
   content: string;
+  total?: number;
   count?: number;
   imageName?: string;
   promotion?: IPromotion;
