@@ -32,8 +32,22 @@ export class ProductComponent implements OnInit {
     return `Image of product ${this.product.name}`;
   }
 
-  public increaseProductCounter() {
-    this.product.count ? this.product.count++ : this.product.count = 1;
+  private get productInCart(): boolean {
+    if (this.getCartFromStorage()) {
+      const cartProduct = this.getProductFromCart();
+      if (cartProduct) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private getCartFromStorage() {
+    return JSON.parse(sessionStorage.getItem('cart')) as IProduct[];
+  }
+
+  private getProductFromCart() {
+    return this.getCartFromStorage().find(sameProduct => sameProduct.id === this.product.id);
   }
 
   public goToDetails() {
@@ -41,14 +55,14 @@ export class ProductComponent implements OnInit {
   }
 
   public addToCart(): void {
-    if (sessionStorage.getItem('cart')) {
-      const cart = JSON.parse(sessionStorage.getItem('cart')) as IProduct[];
-      const cartProduct = cart.find(sameProduct => sameProduct.id === this.product.id);
-      if (cartProduct) {
-        cartProduct.count++;
-      } else {
-        this.product.count = 1;
+    this.product.count ? this.product.count++ : this.product.count = 1;
+    const cart = this.getCartFromStorage();
+    if (cart) {
+      const cartProduct = this.getProductFromCart();
+      if (!cartProduct) {
         cart.push(this.product);
+      } else {
+        cartProduct.count++;
       }
       sessionStorage.setItem('cart', JSON.stringify(cart));
     } else {
@@ -56,10 +70,10 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  public openCartDialog(event): void {
-    event.stopPropagation();
+  public openCartDialog(event?): void {
+    event?.stopPropagation();
     this.addToCart();
-    const dialogRef = this.dialog.open(ProductDialogComponent, {data: {...this.product}});
+    const dialogRef = this.dialog.open(ProductDialogComponent, {data: {...this.product}, width: '900px'});
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('navigate to cart');
@@ -67,4 +81,31 @@ export class ProductComponent implements OnInit {
     });
   }
 
+  public removeFromCart(): void {
+    if (this.getCartFromStorage()) {
+      const cart = this.getCartFromStorage();
+      const productIndex = cart.findIndex(sameProduct => sameProduct.id === this.product.id);
+      if (productIndex >= 0) {
+        cart.splice(productIndex, 1);
+        sessionStorage.setItem('cart', JSON.stringify(cart));
+        this.product.count = 0;
+      }
+    }
+  }
+
+  public updateCart(): void {
+    if (sessionStorage.getItem('cart')) {
+      const cart = JSON.parse(sessionStorage.getItem('cart')) as IProduct[];
+      const cartProduct = cart.find(sameProduct => sameProduct.id === this.product.id);
+      if (!cartProduct) {
+        cart.push(this.product);
+      } else {
+        cartProduct.count = this.product.count;
+      }
+      sessionStorage.setItem('cart', JSON.stringify(cart));
+    } else {
+      sessionStorage.setItem('cart', JSON.stringify([this.product]));
+    }
+    this.openCartDialog();
+  }
 }

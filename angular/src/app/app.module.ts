@@ -25,6 +25,7 @@ import {ProductDetailsModule} from './pages/product-details/product-details.modu
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'product-details', component: ProductDetailsComponent},
+
     ], {relativeLinkResolution: 'legacy'}),
     BrowserAnimationsModule,
     ProductsModule,

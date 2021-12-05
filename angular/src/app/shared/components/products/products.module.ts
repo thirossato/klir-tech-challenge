@@ -8,6 +8,7 @@ import {ProductListComponent} from './product-list/product-list.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ProductDialogComponent} from './product-dialog/product-dialog.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    FormsModule
   ]
 })
 export class ProductsModule {

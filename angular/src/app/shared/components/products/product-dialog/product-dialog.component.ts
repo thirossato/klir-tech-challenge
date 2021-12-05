@@ -36,7 +36,11 @@ export class ProductDialogComponent implements OnInit {
           if (item.promotion.id === PromotionEnum.THREE_FOR_TEN) {
             item.total = promoHelper.getThreeForTen(item);
           }
+        } else {
+          item.total = item.price * item.count;
         }
+      } else {
+        item.total = item.price * item.count;
       }
       total += item.total;
     });

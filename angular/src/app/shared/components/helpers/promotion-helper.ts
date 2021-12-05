@@ -5,7 +5,7 @@ export class PromotionHelper {
     if (product.count % 2 === 0) {
       return (product.price * product.count) / 2;
     } else {
-      return ((product.price * product.count - 1) / 2) + product.price;
+      return ((product.price * (product.count - 1)) / 2) + product.price;
     }
   }
 

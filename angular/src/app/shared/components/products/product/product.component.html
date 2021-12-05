@@ -1,29 +1,48 @@
-<ng-container *ngIf="showDetails else listView">
+<ng-container *ngIf="showDetails else cardView">
+  <h1 *ngIf="!cartView">{{product.name}}</h1>
   <div class="product-detais">
-    <div class="product-image">
+    <div [ngClass]="{'product-image': !cartView, 'product-image-small': cartView }">
       <img [src]="productImage" [alt]="productImageAlt">
     </div>
-    <div class="product-contents">
-      <h1>{{product.name}}</h1>
+    <div class="product-contents" *ngIf="!cartView">
       <p>{{product.content}}</p>
+      <h2>
+        {{product.price | currency:'EUR' }}
+      </h2>
     </div>
-    <div class="actions">
+    <div *ngIf="!productInCart" [ngClass]="{'actions':!cartView, 'cart-actions':cartView}">
+
       <label for="productQuantity">Quantity</label>
-      <input id="productQuantity" type="number" (change)="increaseProductCounter()">
-      <button mat-flat-button color="primary" (click)="addToCart()">Add to cart
+      <input id="productQuantity" type="number" [(ngModel)]="product.count">
+
+      <button *ngIf="cartView" mat-flat-button color="primary" (click)="updateCart()">Update cart
+        <mat-icon>update</mat-icon>
+      </button>
+      <button *ngIf="!cartView" [disabled]="!product.count" mat-flat-button color="primary" (click)="updateCart()">Add
+        to cart
         <mat-icon>add_shopping_cart</mat-icon>
       </button>
+      <button *ngIf="cartView" mat-flat-button color="warn" (click)="removeFromCart()">Remove from cart
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
-
+  </div>
+  <div *ngIf="productInCart">
+    <p>You already have this product in your cart</p>
   </div>
 </ng-container>
-<ng-template #listView>
-  <mat-card class="product-card" (click)="goToDetails()" >
-    <mat-card-title>{{product.name}}</mat-card-title>
-    <img mat-card-lg-image [src]="productImage" [alt]="productImageAlt">
-    <mat-card-content>
+<ng-template #cardView>
+  <mat-card class="product-card" (click)="goToDetails()">
+    <mat-card-title-group>
+      <mat-card-title>{{product.name}}</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content class="card-content">
+      <img mat-card-lg-image [src]="productImage" [alt]="productImageAlt">
       <p>{{product.content}}</p>
     </mat-card-content>
+    <h2>
+      {{product.price | currency:'EUR' }}
+    </h2>
     <mat-card-actions>
       <button mat-fab color="primary" aria-label="Add to cart button with cart icon" (click)="openCartDialog($event)">
         <mat-icon>add_shopping_cart</mat-icon>
