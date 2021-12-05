@@ -1,4 +1,4 @@
-<ng-container *ngIf="showDetails else simpleView">
+<ng-container *ngIf="showDetails else listView">
   <div class="product-detais">
     <div class="product-image">
       <img [src]="productImage" [alt]="productImageAlt">
@@ -17,7 +17,7 @@
 
   </div>
 </ng-container>
-<ng-template #simpleView>
+<ng-template #listView>
   <mat-card class="product-card">
     <mat-card-title>{{product.name}}</mat-card-title>
     <img mat-card-lg-image [src]="productImage" [alt]="productImageAlt">

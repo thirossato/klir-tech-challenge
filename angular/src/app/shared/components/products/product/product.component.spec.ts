@@ -1,7 +1,7 @@
 import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
 
 import {ProductComponent} from './product.component';
-import {ProductMock} from '../../../../../shared/mocks/ProductsMock';
+import {ProductMock} from '../../../mocks/ProductsMock';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';

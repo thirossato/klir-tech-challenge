@@ -8,7 +8,7 @@ import {AppComponent} from './app.component';
 import {NavMenuComponent} from './shared/nav-menu/nav-menu.component';
 import {HomeComponent} from './pages/home/home.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ProductsModule} from './pages/home/components/products/products.module';
+import {ProductsModule} from './shared/components/products/products.module';
 import {ProductDetailsComponent} from './pages/product-details/product-details.component';
 import {ProductDetailsModule} from './pages/product-details/product-details.module';
 

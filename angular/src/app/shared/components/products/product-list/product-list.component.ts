@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {IProduct} from '../../../../../shared/models/IProduct';
-import {ProductsService} from '../../../../../shared/services/products.service';
+import {IProduct} from '../../../models/IProduct';
+import {ProductsService} from '../../../services/products.service';
 import {filter, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 

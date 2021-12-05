@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductDetailsComponent } from './product-details.component';
-import {ProductsModule} from '../home/components/products/products.module';
+import {ProductsModule} from '../../shared/components/products/products.module';
 
 
 
