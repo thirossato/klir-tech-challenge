@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IProduct} from '../../../models/IProduct';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
@@ -13,7 +13,7 @@ export class ProductComponent implements OnInit {
   @Input() product: IProduct;
   @Input() showDetails: boolean;
   @Input() cartView: boolean;
-
+  @Output() cartUpdated: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private router: Router,
@@ -76,7 +76,7 @@ export class ProductComponent implements OnInit {
     const dialogRef = this.dialog.open(ProductDialogComponent, {data: {...this.product}, width: '900px'});
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('navigate to cart');
+        this.router.navigateByUrl('cart');
       }
     });
   }
@@ -90,6 +90,7 @@ export class ProductComponent implements OnInit {
         sessionStorage.setItem('cart', JSON.stringify(cart));
         this.product.count = 0;
       }
+      this.cartUpdated.emit();
     }
   }
 
@@ -106,6 +107,6 @@ export class ProductComponent implements OnInit {
     } else {
       sessionStorage.setItem('cart', JSON.stringify([this.product]));
     }
-    this.openCartDialog();
+    this.cartUpdated.emit();
   }
 }

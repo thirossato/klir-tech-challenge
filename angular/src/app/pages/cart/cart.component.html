@@ -1,1 +1,13 @@
-<p>cart works!</p>
+<div class="cart">
+  <ng-container *ngIf="cartProducts else noProducts">
+    <div *ngFor="let product of cartProducts">
+      <app-product [showDetails]="true" [cartView]="true" [product]="product" (cartUpdated)="refreshCart()"></app-product>
+      <p class="total-product">subtotal ({{product.count}} item(s)): {{totalProduct (product) | currency: 'EUR'}}<span *ngIf="product.promotion"><b> - {{product.promotion.name}} has been applied</b></span></p>
+    </div>
+    <h2>Total: {{total | currency:'EUR'}}</h2>
+
+  </ng-container>
+  <ng-template #noProducts>
+    <p>You have no products on your cart</p>
+  </ng-template>
+</div>

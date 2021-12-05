@@ -10,7 +10,7 @@
         {{product.price | currency:'EUR' }}
       </h2>
     </div>
-    <div *ngIf="!productInCart" [ngClass]="{'actions':!cartView, 'cart-actions':cartView}">
+    <div *ngIf="!productInCart || cartView" [ngClass]="{'actions':!cartView, 'cart-actions':cartView}">
 
       <label for="productQuantity">Quantity</label>
       <input id="productQuantity" type="number" [(ngModel)]="product.count">
@@ -27,7 +27,7 @@
       </button>
     </div>
   </div>
-  <div *ngIf="productInCart">
+  <div *ngIf="productInCart && !cartView">
     <p>You already have this product in your cart</p>
   </div>
 </ng-container>
